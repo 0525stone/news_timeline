@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:www.cnn.com)",
+      "WebFetch(domain:developer.chrome.com)"
+    ]
+  }
+}

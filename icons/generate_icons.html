@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<!-- 이 파일을 브라우저에서 열고 각 버튼을 클릭하면 PNG 아이콘이 다운로드됩니다 -->
+<html>
+<head><meta charset="UTF-8"><title>아이콘 생성</title></head>
+<body>
+<script>
+function makeIcon(size) {
+  const canvas = document.createElement('canvas');
+  canvas.width = size; canvas.height = size;
+  const ctx = canvas.getContext('2d');
+
+  // 배경 (CNN 빨강)
+  ctx.fillStyle = '#cc0000';
+  ctx.beginPath();
+  ctx.roundRect(0, 0, size, size, size * 0.18);
+  ctx.fill();
+
+  // 타임라인 점 3개
+  const dotR = size * 0.07;
+  const cx = size * 0.35;
+  const ys = [size*0.28, size*0.5, size*0.72];
+  ctx.fillStyle = '#fff';
+  ys.forEach(y => {
+    ctx.beginPath();
+    ctx.arc(cx, y, dotR, 0, Math.PI*2);
+    ctx.fill();
+  });
+
+  // 세로 라인
+  ctx.strokeStyle = 'rgba(255,255,255,0.5)';
+  ctx.lineWidth = size * 0.04;
+  ctx.beginPath();
+  ctx.moveTo(cx, ys[0] + dotR);
+  ctx.lineTo(cx, ys[2] - dotR);
+  ctx.stroke();
+
+  // 가로 라인들
+  ctx.strokeStyle = '#fff';
+  ctx.lineWidth = size * 0.06;
+  ctx.lineCap = 'round';
+  const lineX = size * 0.48;
+  const lineW = size * 0.35;
+  ys.forEach(y => {
+    ctx.beginPath();
+    ctx.moveTo(lineX, y);
+    ctx.lineTo(lineX + lineW, y);
+    ctx.stroke();
+  });
+
+  return canvas.toDataURL('image/png');
+}
+
+[16, 48, 128].forEach(size => {
+  const a = document.createElement('a');
+  a.href = makeIcon(size);
+  a.download = `icon${size}.png`;
+  a.textContent = `icon${size}.png 다운로드`;
+  a.style.display = 'block';
+  a.style.margin = '10px';
+  document.body.appendChild(a);
+
+  // 미리보기
+  const img = new Image();
+  img.src = makeIcon(size);
+  img.style.margin = '0 10px';
+  img.style.imageRendering = 'pixelated';
+  document.body.appendChild(img);
+  document.body.appendChild(document.createElement('br'));
+});
+</script>
+</body>
+</html>
