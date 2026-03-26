@@ -1,0 +1,25 @@
+# IDE / Editor
+.vscode/
+.idea/
+*.suo
+*.user
+
+# Claude Code
+.claude/settings.local.json
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Chrome Extension build artifacts
+*.zip
+*.crx
+*.pem
+
+# Logs
+*.log
+
+# Node (if used for build tools)
+node_modules/
+npm-debug.log*
