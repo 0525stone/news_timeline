@@ -1,4 +1,4 @@
-const STORAGE_KEY = 'cnn_articles';
+const STORAGE_KEY = 'news_articles';
 
 const timelineEl = document.getElementById('timeline');
 const emptyEl = document.getElementById('empty-state');
@@ -28,10 +28,14 @@ function render(articles) {
     item.className = 'timeline-item';
     item.dataset.id = article.id;
 
+    const source = article.source || 'CNN';
     item.innerHTML = `
-      <div class="dot"></div>
+      <div class="dot ${source === 'NAVER' ? 'dot--naver' : ''}"></div>
       <div class="card" data-summary="${escapeAttr(article.summary)}">
-        <div class="card-date">${formatDate(article.date)}</div>
+        <div class="card-meta">
+          <span class="card-date">${formatDate(article.date)}</span>
+          <span class="card-source card-source--${source.toLowerCase()}">${source === 'NAVER' ? '네이버' : 'CNN'}</span>
+        </div>
         <div class="card-title">
           <a href="${escapeAttr(article.url)}" target="_blank">${escapeHtml(article.title)}</a>
         </div>

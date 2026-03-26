@@ -1,6 +1,6 @@
 // Service Worker: 기사 저장 및 Claude API를 이용한 요약 생성
 
-const STORAGE_KEY = 'cnn_articles';
+const STORAGE_KEY = 'news_articles';
 
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   if (message.type === 'ARTICLE_FOUND') {
@@ -25,6 +25,7 @@ async function handleArticle(article) {
     date,
     url,
     summary,
+    source: article.source || 'CNN',
     savedAt: new Date().toISOString()
   };
 

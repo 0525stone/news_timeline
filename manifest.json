@@ -1,14 +1,16 @@
 {
   "manifest_version": 3,
-  "name": "CNN Timeline",
-  "version": "1.0.0",
-  "description": "CNN 기사를 연표 형태로 정리해주는 플러그인",
+  "name": "News Timeline",
+  "version": "1.1.0",
+  "description": "CNN과 네이버 뉴스 기사를 연표 형태로 정리해주는 플러그인",
   "permissions": [
     "storage",
     "activeTab"
   ],
   "host_permissions": [
-    "https://*.cnn.com/*"
+    "https://*.cnn.com/*",
+    "https://news.naver.com/*",
+    "https://n.news.naver.com/*"
   ],
   "background": {
     "service_worker": "background.js"
@@ -16,6 +18,16 @@
   "content_scripts": [
     {
       "matches": ["https://*.cnn.com/*"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "https://news.naver.com/article/*",
+        "https://news.naver.com/main/read*",
+        "https://n.news.naver.com/article/*",
+        "https://n.news.naver.com/mnews/article/*"
+      ],
       "js": ["content.js"],
       "run_at": "document_idle"
     }
